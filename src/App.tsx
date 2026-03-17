@@ -1,3 +1,5 @@
+import { TaskCard } from "./components/taskCard.tsx";
+
 type Task = {
   id: string;
   title: string;
@@ -21,12 +23,12 @@ export default function App()
 
       <h2>To Do</h2>
       {todoTasks.map((task) => (
-        <p key={task.id}>{task.title}</p>
+        <TaskCard key={task.id} task={task} />
       ))}
 
       <h2>Done</h2>
       {doneTasks.map((task) => (
-        <p key={task.id}>{task.title}</p>
+        <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );
