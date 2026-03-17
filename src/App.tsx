@@ -1,25 +1,33 @@
+type Task = {
+  id: string;
+  title: string;
+  status: "todo" | "done";
+};
+
 export default function App()
 {
-  function handleClick()
-  {
-    console.log("clicked");
-  }
+  const tasks: Task[] = [
+    { id: "1", title: "Do homework", status: "todo" },
+    { id: "2", title: "Study TypeScript", status: "todo" },
+    { id: "3", title: "Clean room", status: "done" }
+  ];
+
+  const todoTasks = tasks.filter((task) => task.status === "todo");
+  const doneTasks = tasks.filter((task) => task.status === "done");
 
   return (
     <div>
-      <h1>Hello world</h1>
-      <button onClick={handleClick}>Click me</button>
-        <div> 
-          <h1>Another section</h1>
-          <button onClick={handleClick}>Click me too</button>
-        </div>
+      <h1>Task Board</h1>
 
-        <div> 
-          <h1>Yet another section</h1>
-          <button onClick={handleClick}>Click me three</button>
-        </div>
+      <h2>To Do</h2>
+      {todoTasks.map((task) => (
+        <p key={task.id}>{task.title}</p>
+      ))}
+
+      <h2>Done</h2>
+      {doneTasks.map((task) => (
+        <p key={task.id}>{task.title}</p>
+      ))}
     </div>
-
-
   );
 }
