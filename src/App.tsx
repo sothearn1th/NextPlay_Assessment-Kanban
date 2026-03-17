@@ -48,7 +48,10 @@ export default function App()
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Task Board</h1>
+      
+      <h1 style={{ fontFamily: "'CustomHeaderFont1', sans-serif" }}>
+        Task Board
+      </h1>
 
       <div style={{ marginBottom: 20 }}>
         <input

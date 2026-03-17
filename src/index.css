@@ -31,14 +31,14 @@
 }
 
 @font-face {
-  font-family: 'MyCustomFont';
+  font-family: 'CustomHeaderFont1';
   src: url('./assets/fonts/Old Vario.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'MyCustomFont';
+  font-family: 'CustomBodyFont1';
   src: url('./assets/fonts/ClassVariable.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;

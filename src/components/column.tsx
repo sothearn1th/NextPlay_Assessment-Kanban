@@ -26,8 +26,10 @@ export function Column({ title, tasks, onDelete }: ColumnProps)
       }}
     >
     
-      <h2>{title}</h2>
-      
+      <h2 style={{ fontFamily: "'CustomHeaderFont1', sans-serif" }}>
+        {title}
+      </h2>
+
       {tasks.map((task) => (
         <TaskCard
           key={task.id}

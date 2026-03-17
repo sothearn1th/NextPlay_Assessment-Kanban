@@ -11,6 +11,7 @@ export function TaskCard({ task, onDelete }: TaskCardProps)
 
     <div
       style={{
+        fontFamily: "'CustomBodyFont1', sans-serif", // Custom font for the card content
         border: "1px solid gray",
         borderRadius: "12px",     // rounded edges
         backgroundColor: "#3f3f3f", // A slightly lighter dark grey for the card background
