@@ -8,9 +8,11 @@ type TaskCardProps = {
 export function TaskCard({ task, onDelete }: TaskCardProps)
 {
   return (
+
     <div
       style={{
         border: "1px solid gray",
+        borderRadius: "12px",     // rounded edges
         padding: 10,
         marginBottom: 8
       }}
@@ -21,5 +23,8 @@ export function TaskCard({ task, onDelete }: TaskCardProps)
       </p>
       <button onClick={() => onDelete(task.id)}>Delete Task</button>
     </div>
+
+
+
   );
 }
