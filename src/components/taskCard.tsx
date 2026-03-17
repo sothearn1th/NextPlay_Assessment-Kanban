@@ -17,6 +17,7 @@ export function TaskCard({ task }: TaskCardProps)
       }}
     >
       <p>{task.title}</p>
+
     </div>
   );
 }
