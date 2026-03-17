@@ -30,6 +30,25 @@
   }
 }
 
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('./assets/fonts/Old Vario.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('./assets/fonts/ClassVariable.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  font-family: 'MyCustomFont', sans-serif;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
