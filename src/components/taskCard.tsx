@@ -13,38 +13,36 @@ export function TaskCard({ task, onDelete }: TaskCardProps)
         id: task.id 
     });
 
+    const theStyle: React.CSSProperties = {
+        fontFamily: "'CustomBodyFont1', sans-serif",
+        border: "1px solid gray",
+        borderRadius: "12px",
+        backgroundColor: "#3f3f3f",
+        padding: 10,
+        marginBottom: 8,
+        cursor: "grab",
+        transform: transform
+        ? `translate(${transform.x}px, ${transform.y}px)`
+        : undefined
+  };
+
     return (
+    <div
+      ref={setNodeRef}
+      style={theStyle}
+      {...listeners}
+      {...attributes}
+    >
+      <p>{task.title}</p>
 
-        <div
-        ref={setNodeRef}
-        style={{
-
-            fontFamily: "'CustomBodyFont1', sans-serif", // Custom font for the card content
-            border: "1px solid gray",
-            borderRadius: "12px",     // rounded edges
-            backgroundColor: "#3f3f3f", // A slightly lighter dark grey for the card background
-            padding: 10,
-            marginBottom: 8,
-            transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
-        }}
-        {...listeners}
-        {...attributes}
-        >
-        
-        <p>{task.title}</p>
-
-
-        <p style={{ fontSize: 12, fontWeight: "bold", color: "gray" }}>
-            {task.created_at.toLocaleString()}
-        </p>
-
-
-        <button onClick={() => onDelete(task.id)}>Delete Task</button>
-
-
-        </div>
-
-
+      <p>{task.created_at.toLocaleString()}</p>
+      <button 
+      style={{ borderRadius: "8px", border: "1px solid #333", padding: 5, cursor: "pointer" }}
+      onClick={() => onDelete(task.id)}
+    >
+      Delete
+    </button>
+    </div>
 
   );
 }

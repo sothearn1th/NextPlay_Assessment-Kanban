@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Task } from "./types/task";
 import { Column } from "./components/column";
+import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 
 export default function App()
 {
@@ -16,6 +17,32 @@ export default function App()
   let inReviewTasks = tasks.filter((task) => task.status === "in_review");
   let doneTasks = tasks.filter((task) => task.status === "done");
 
+
+  ///>>>> TODO DRAG AND DROP BACKEND LOGIC <<<<///
+  function handleDragEnd(event: DragEndEvent)
+  {
+    const { active, over } = event;
+
+    if (!over)
+    {
+      return;
+    }
+
+    const taskId = String(active.id);
+    const newStatus = String(over.id) as "todo" | "done";
+
+    const newTasks = tasks.map((task) =>
+    {
+      if (task.id === taskId)
+      {
+        return { ...task, status: newStatus };
+      }
+
+      return task;
+    });
+
+    setTasks(newTasks);
+  }
 
   function deleteTask(id: string)
   {
@@ -46,7 +73,7 @@ export default function App()
     <div style={{ padding: 20 }}>
 
       
-      <h1 style={{ fontFamily: "'CustomHeaderFont1', sans-serif" }}>
+      <h1 style={{ fontFamily: "'CustomHeaderFont1', sans-serif", fontSize: 72 }}>
         Task Board
       </h1>
 
@@ -78,10 +105,10 @@ export default function App()
 
        {/* The frontend four columns are here */}
 
-        <Column title="To Do" tasks={todoTasks} onDelete={deleteTask} />
-        <Column title="In Progress" tasks={inProgressTasks} onDelete={deleteTask} />
-        <Column title="In Review" tasks={inReviewTasks} onDelete={deleteTask} />
-        <Column title="Done" tasks={doneTasks} onDelete={deleteTask} />
+        <Column title="To Do" tasks={todoTasks} onDelete={deleteTask} status={"todo"} />
+        <Column title="In Progress" tasks={inProgressTasks} onDelete={deleteTask} status={"in_progress"} />
+        <Column title="In Review" tasks={inReviewTasks} onDelete={deleteTask} status={"in_review"} />
+        <Column title="Done" tasks={doneTasks} onDelete={deleteTask} status={"done"} />
 
 
       </div>
