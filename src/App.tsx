@@ -1,20 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Task } from "./types/task";
 import { Column } from "./components/column";
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 
+import { mySupabase } from "./lib/supabaseClient.ts"
+
+
 export default function App()
 {
+
+  //States
   const [tasks, setTasks] = useState<Task[]>([]);  /// later will query from the database here for inital data
 
   const [textBox, setNewTitle] = useState("");
 
+  const [isLoading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+  
+  //const {data: {user}} = await mySupabase.auth.signInAnonymously(); //handshake with the database
+
+  //TODO: Use useEffect and fetch the tasks from the database of the user.
+  /*
+  useEffect(() => 
+  {
+      async function fetchTasks()
+      {
+        
+      }
+  }, [])};
+  */
+  
+  
 
 
-  //** The backend for the four columns are here */
-
-
-  ///>>>> TODO DRAG AND DROP BACKEND LOGIC <<<<///
   function handleDragEnd(event: DragEndEvent)
   {
     /// drag event.active == being dragged and drag eveet.over dropped event
@@ -47,6 +66,10 @@ export default function App()
   }
 
 
+
+  /*
+  TODO: rewire to adding data to the database
+  */
   function addTask(newTaskTitle: string)
   {
     if (newTaskTitle.trim() === "") return;
