@@ -4,13 +4,10 @@ import { Column } from "./components/column";
 
 export default function App()
 {
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: "1", title: "Do homework", status: "todo", created_at: new Date() },
-    { id: "2", title: "Study TypeScript", status: "todo", created_at: new Date() },
-    { id: "3", title: "Clean room", status: "done", created_at: new Date() }
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const [newTitle, setNewTitle] = useState("");
+  const [textBox, setNewTitle] = useState("");
+
 
 
   //** The backend for the four columns are here */
@@ -26,41 +23,46 @@ export default function App()
     setTasks(newTasks);
   }
 
-  function addTask()
+
+  function addTask(newTaskTitle: string)
   {
-    if (newTitle.trim() === "")
+    if (newTaskTitle.trim() === "") return;
+    else
     {
-      return;
+      const newTask: Task = {
+        id: crypto.randomUUID(),
+        title: newTaskTitle,
+        status: "todo",
+        created_at: new Date(Date.now())
+      };
+      setTasks([...tasks, newTask]);
+      setNewTitle("");
     }
-
-    const newTask: Task = {
-      id: Date.now().toString(),
-      title: newTitle,
-      status: "todo",
-      created_at: new Date()
-    };
-
-    setTasks([...tasks, newTask]);
-    setNewTitle("");
   }
 
 
 
   return (
     <div style={{ padding: 20 }}>
+
       
       <h1 style={{ fontFamily: "'CustomHeaderFont1', sans-serif" }}>
         Task Board
       </h1>
 
-      <div style={{ marginBottom: 20 }}>
+
+      <div 
+        style={{ marginBottom: 25 }}>
+        
+
         <input
           type="text"
-          value={newTitle}
+          value={textBox}
           onChange={(event) => setNewTitle(event.target.value)}
           placeholder="Enter a task"
         />
-        <button onClick={addTask} style={{ marginLeft: 8 }}>
+        
+        <button onClick={() => addTask(textBox)} style={{ marginLeft: 8 }}>
           Add
         </button>
       </div>

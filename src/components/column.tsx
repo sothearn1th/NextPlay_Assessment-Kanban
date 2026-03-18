@@ -13,7 +13,7 @@ type ColumnProps = {
 export function Column({ title, tasks, onDelete }: ColumnProps)
 {
   return (
-
+    
     <div
       style={{
         border: "1px solid #333", // Darker border
