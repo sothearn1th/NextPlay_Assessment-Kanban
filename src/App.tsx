@@ -5,44 +5,40 @@ import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 
 export default function App()
 {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);  /// later will query from the database here for inital data
 
   const [textBox, setNewTitle] = useState("");
 
 
 
   //** The backend for the four columns are here */
-  let todoTasks = tasks.filter((task) => task.status === "todo");
-  let inProgressTasks = tasks.filter((task) => task.status === "in_progress");
-  let inReviewTasks = tasks.filter((task) => task.status === "in_review");
-  let doneTasks = tasks.filter((task) => task.status === "done");
 
 
   ///>>>> TODO DRAG AND DROP BACKEND LOGIC <<<<///
   function handleDragEnd(event: DragEndEvent)
   {
-    const { active, over } = event;
+    /// drag event.active == being dragged and drag eveet.over dropped event
+    const { active: taskCardBeingDropped, over: droppableArea } = event;
 
-    if (!over)
+    if (!droppableArea)
     {
       return;
     }
 
-    const taskId = String(active.id);
-    const newStatus = String(over.id) as "todo" | "done";
-
-    const newTasks = tasks.map((task) =>
+    const newTasksArr = tasks.map((currTask) =>
     {
-      if (task.id === taskId)
+      if (currTask.id === taskCardBeingDropped.id) 
       {
-        return { ...task, status: newStatus };
+        return { ...currTask, status: droppableArea.id as Task["status"] }; // ...
       }
-
-      return task;
-    });
-
-    setTasks(newTasks);
+      return currTask;
+    })
+    
+    setTasks(newTasksArr);
   }
+
+
+
 
   function deleteTask(id: string)
   {
@@ -94,6 +90,45 @@ export default function App()
         </button>
       </div>
 
+      <DndContext onDragEnd={handleDragEnd}>
+        <div
+          style={{
+            display: "flex",
+            gap: 20,
+            alignItems: "flex-start"
+          }}
+        >
+                 {/* The frontend four columns are here */}
+
+
+          <Column
+            title="To Do"
+            status="todo"
+            tasksInColumn={tasks.filter((task) => task.status === "todo")}
+            onDelete={deleteTask}
+          />
+          <Column
+            title="In Progress"
+            status="in_progress"
+            tasksInColumn={tasks.filter((task) => task.status === "in_progress")}
+            onDelete={deleteTask}
+          />
+          <Column
+            title="In Review"
+            status="in_review"
+            tasksInColumn={tasks.filter((task) => task.status === "in_review")  }
+            onDelete={deleteTask}
+          />
+          <Column
+            title="Done"
+            status="done"
+            tasksInColumn={tasks.filter((task) => task.status === "done") }
+            onDelete={deleteTask}
+          />
+        </div>
+      </DndContext>
+
+
       <div
         style={{
           display: "flex",
@@ -103,12 +138,8 @@ export default function App()
       >
 
 
-       {/* The frontend four columns are here */}
 
-        <Column title="To Do" tasks={todoTasks} onDelete={deleteTask} status={"todo"} />
-        <Column title="In Progress" tasks={inProgressTasks} onDelete={deleteTask} status={"in_progress"} />
-        <Column title="In Review" tasks={inReviewTasks} onDelete={deleteTask} status={"in_review"} />
-        <Column title="Done" tasks={doneTasks} onDelete={deleteTask} status={"done"} />
+
 
 
       </div>

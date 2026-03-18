@@ -6,17 +6,18 @@ import { useDroppable } from "@dnd-kit/core";
 type ColumnProps = {
   title: string;
   status: Task["status"]; 
-  tasks: Task[];
+  tasksInColumn: Task[];
   onDelete: (id: string) => void; 
 };
 
 
 
-export function Column({ title, status, tasks, onDelete }: ColumnProps)
+export function Column({ title, status, tasksInColumn, onDelete }: ColumnProps)
 {
   const { setNodeRef, isOver } = useDroppable({
     id: status
   });
+  
   return (
 
     <div
@@ -36,7 +37,7 @@ export function Column({ title, status, tasks, onDelete }: ColumnProps)
         {title}
       </h2>
 
-      {tasks.map((task) => (
+      {tasksInColumn.map((task) => (
         <TaskCard
           key={task.id}
           task={task}
@@ -48,32 +49,4 @@ export function Column({ title, status, tasks, onDelete }: ColumnProps)
   );
 }
 
-/*
 
-export function Column({ title, tasks, onDelete }: ColumnProps)
-{
-  return (
-    <div
-
-      style={{
-        border: "1px solid black",
-        padding: 12,
-        width: 250,
-        minHeight: 200
-      }}
-    >
-      <h2>{title}</h2>
-
-      {tasks.map((task) => (
-        <TaskCard
-          key={task.id}
-          task={task}
-          onDelete={onDelete}
-        />
-      ))}
-
-    </div>
-  );
-
-}
-    */
