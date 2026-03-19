@@ -36,12 +36,13 @@ export function TaskCard({ task, onDelete }: TaskCardProps)
       <p>{task.title}</p>
 
       <p>{task.created_at.toLocaleString()}</p>
+
       <button 
       style={{ borderRadius: "8px", border: "1px solid #333", padding: 5, cursor: "pointer" }}
-      onClick={() => onDelete(task.id)}
-    >
-      Delete
-    </button>
+      onClick={() => onDelete(task.id)}>
+      Delete</button>
+
+
     </div>
 
   );

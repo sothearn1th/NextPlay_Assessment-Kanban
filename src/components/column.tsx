@@ -44,8 +44,8 @@ export function Column({ title, status, tasksInColumn, onDelete }: ColumnProps)
           onDelete={onDelete}
         />
       ))}
-
     </div>
+
   );
 }
 

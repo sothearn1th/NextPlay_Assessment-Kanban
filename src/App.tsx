@@ -18,19 +18,6 @@ export default function App()
 
   const [error, setError] = useState("");
   
-  //const {data: {user}} = await mySupabase.auth.signInAnonymously(); //handshake with the database
-
-  //TODO: Use useEffect and fetch the tasks from the database of the user.
-  /*
-  useEffect(() => 
-  {
-      async function fetchTasks()
-      {
-        
-      }
-  }, [])};
-  */
-  
   
 
 
@@ -58,8 +45,10 @@ export default function App()
 
 
 
-
-  function deleteTask(id: string)
+  /*
+  TODO: Rewire to delete from the database
+  */
+  function deleteTask(id: string): void
   {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);

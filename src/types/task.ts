@@ -4,5 +4,5 @@ export type Task = {
   id: string;
   title: string;
   status: TaskStatus;
-  created_at: Date;
+  created_at: Date | string;
 };
